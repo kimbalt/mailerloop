@@ -1,4 +1,4 @@
-mailerserver
+MailerLoop API
 ============
 
-Official PHP wrapper for MailerServer API
+Official PHP wrapper for MailerLoop API
