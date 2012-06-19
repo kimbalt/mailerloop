@@ -20,6 +20,8 @@ class MailerLoop {
 	
 	private $type;
 	
+	private $language;
+	
 	public function __construct() {
 	
 	}
@@ -89,6 +91,13 @@ class MailerLoop {
         return $this;
         
     }
+
+	public function setLanguage( $code ) {
+		
+		$this->language = $code;
+		
+		return $this;
+	}
 	
 	public function send() {
 
@@ -101,6 +110,7 @@ class MailerLoop {
             'type' => $this->type,
             'variables' => $this->variables,
             'templateId' => $this->templateId,
+			'language' => $this->language
         );
 
 		$ch = curl_init( self::MAILER_SERVER_URI );
