@@ -22,7 +22,9 @@ class MailerLoop {
 	
 	private $language;
 	
-	public function __construct() {
+	public function __construct( $apiKey ) {
+	
+		$this->setApiKey( $apiKey );
 	
 	}
 	
