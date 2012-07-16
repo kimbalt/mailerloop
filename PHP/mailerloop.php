@@ -20,7 +20,9 @@ class MailerLoop {
 	
 	private $type;
 	
-	private $language;
+	private $language;	
+	
+	private $batchRecipients;		
 	
 	public function __construct( $apiKey ) {
 	
@@ -29,7 +31,7 @@ class MailerLoop {
 	}
 	
 	public function setRecipient( $email, $name = null ) {
-	   
+	   	   
 	   $this->recipientEmail = $email;
 	   
 	   if ( !empty( $name ) ) {
@@ -101,19 +103,43 @@ class MailerLoop {
 		return $this;
 	}
 	
+	public function addRecipient( $email, $variables ) {    	
+    	$this->batchRecipients[] = array('email' => $email, 'variables' => $variables );    	
+    	
+    	return $this;
+	}
+	
+	public function addRecipients( $recipients ) {
+    	
+    	foreach ( $recipients as $recipient ) {
+        	$this->addRecipient( $recipient['email'], $recipient['variables'] );
+    	}
+    	
+    	return $this;
+	}
+	
 	public function send() {
 
-        $data = array(
+        $data = array(            
             'fromName' => $this->fromName,
             'fromEmail' => $this->fromEmail,
-            'recipientName' => $this->recipientName,
-            'recipientEmail' => $this->recipientEmail,
             'apiKey' => $this->apiKey,
             'type' => $this->type,
-            'variables' => $this->variables,
             'templateId' => $this->templateId,
 			'language' => $this->language
         );
+        
+        if ( !empty( $this->batchRecipients ) ) {
+            
+            $data['batch'] = $this->batchRecipients;
+            
+        } else {
+            
+            $data['recipientName'] = $this->recipientName;
+            $data['recipientEmail'] = $this->recipientEmail;
+            $data['variables'] = $this->variables;   
+                 
+        }        
 
 		$ch = curl_init( self::MAILER_SERVER_URI );
 	
