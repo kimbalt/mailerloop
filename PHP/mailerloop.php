@@ -2,7 +2,7 @@
 
 class MailerLoop {
 		
-	const MAILER_SERVER_URI = 'http://api.mailerloop.com/mailerserver/send';
+	const MAILER_SERVER_URI = 'http://api.mailerloop.lan/mailerserver/send';
 	
 	private $apiKey;
 	
@@ -22,7 +22,9 @@ class MailerLoop {
 	
 	private $language;	
 	
-	private $batchRecipients;		
+	private $batchRecipients;
+	
+	private $attachments;		
 	
 	public function __construct( $apiKey ) {
 	
@@ -103,8 +105,9 @@ class MailerLoop {
 		return $this;
 	}
 	
-	public function addRecipient( $email, $variables ) {    	
-    	$this->batchRecipients[] = array('email' => $email, 'variables' => $variables );    	
+	public function addRecipient( $email, $variables, $attachments = array() ) {    	
+
+    	$this->batchRecipients[] = array('email' => $email, 'variables' => $variables, 'attachments' => $attachments );    	
     	
     	return $this;
 	}
@@ -112,10 +115,17 @@ class MailerLoop {
 	public function addRecipients( $recipients ) {
     	
     	foreach ( $recipients as $recipient ) {
-        	$this->addRecipient( $recipient['email'], $recipient['variables'] );
+        	$this->addRecipient( $recipient['email'], $recipient['variables'], !empty( $recipient['attachments'] ) ? $recipient['attachments'] : array() );
     	}
     	
     	return $this;
+	}
+	
+	public function addAttachment( $filename, $content ) {
+		
+		$this->attachments[] = array('filename' => $filename, 'content' => $content );
+		
+		return $this;
 	}
 	
 	public function send() {
@@ -138,6 +148,7 @@ class MailerLoop {
             $data['recipientName'] = $this->recipientName;
             $data['recipientEmail'] = $this->recipientEmail;
             $data['variables'] = $this->variables;   
+			$data['attachments'] = $this->attachments;
                  
         }        
 
@@ -149,6 +160,8 @@ class MailerLoop {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		$res = curl_exec($ch);
+
+		echo $res;
 
 		curl_close($ch);
 

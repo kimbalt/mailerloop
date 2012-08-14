@@ -18,7 +18,7 @@ class MailerLoop:
     def set_recipient(self, email, name=None):
         self.recipient_email = email
         if name:
-            self.recipient_name = name
+            self.recipient_name = name            
         return self
 
     def set_api_key(self, api_key):
