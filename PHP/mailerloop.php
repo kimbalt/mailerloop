@@ -2,7 +2,7 @@
 
 class MailerLoop {
 		
-	const MAILER_SERVER_URI = 'http://api.mailerloop.lan/mailerserver/send';
+	const MAILER_SERVER_URI = 'http://api.mailerloop.com/mailerserver/send';
 	
 	private $apiKey;
 	
