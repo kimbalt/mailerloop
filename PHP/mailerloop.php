@@ -136,7 +136,7 @@ class MailerLoop {
             'apiKey' => $this->apiKey,
             'type' => $this->type,
             'templateId' => $this->templateId,
-			'language' => $this->language
+            'language' => $this->language,
         );
         
         if ( !empty( $this->batchRecipients ) ) {
@@ -160,8 +160,6 @@ class MailerLoop {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		$res = curl_exec($ch);
-
-		echo $res;
 
 		curl_close($ch);
 
