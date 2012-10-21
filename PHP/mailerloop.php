@@ -105,9 +105,17 @@ class MailerLoop {
 		return $this;
 	}
 	
-	public function addRecipient( $email, $variables, $attachments = array() ) {    	
+	public function addRecipient( $recipient ) {    	
 
-    	$this->batchRecipients[] = array('email' => $email, 'variables' => $variables, 'attachments' => $attachments );    	
+		if ( !isset( $recipient['email'] ) ) {
+			$recipient['email'] = '';
+		}
+		
+		if ( !isset( $recipient['variables'] ) ) {
+			$recipient['variables'] = '';
+		}
+
+    	$this->batchRecipients[] = $recipient;    	
     	
     	return $this;
 	}
@@ -115,7 +123,7 @@ class MailerLoop {
 	public function addRecipients( $recipients ) {
     	
     	foreach ( $recipients as $recipient ) {
-        	$this->addRecipient( $recipient['email'], $recipient['variables'], !empty( $recipient['attachments'] ) ? $recipient['attachments'] : array() );
+        	$this->addRecipient( $recipient );
     	}
     	
     	return $this;
