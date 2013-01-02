@@ -2,7 +2,7 @@
 
 class MailerLoop {
 		
-	const MAILER_SERVER_URI = 'http://api.mailerloop.com/mailerserver/send';
+	const MAILER_SERVER_URI = 'https://app.mailerloop.com/api/v1/messages.json/';
 	
 	private $apiKey;
 	
@@ -143,7 +143,7 @@ class MailerLoop {
             'fromEmail' => $this->fromEmail,
             'apiKey' => $this->apiKey,
             'type' => $this->type,
-            'templateId' => $this->templateId,
+            'mailId' => $this->templateId,
             'language' => $this->language,
         );
         
@@ -166,6 +166,7 @@ class MailerLoop {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query( $data ) );
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false );
 
 		$res = curl_exec($ch);
 
