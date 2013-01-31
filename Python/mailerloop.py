@@ -1,7 +1,7 @@
 import urllib, urllib2, json
 
 class MailerLoop:
-    MAILER_SERVER_URI = 'http://api.mailerloop.com/mailerserver/send'
+    MAILER_SERVER_URI = 'https://app.mailerloop.com/api/v1/messages'
     api_key = ''
     from_name = ''
     from_email = ''
@@ -67,4 +67,4 @@ class MailerLoop:
             'templateId': self.template_id,
             'language': self.language
         }
-        return json.loads(urllib2.urlopen(self.MAILER_SERVER_URI, data=urllib.urlencode(data)).read())
+        return urllib2.urlopen(self.MAILER_SERVER_URI, data=urllib.urlencode(data)).read()
