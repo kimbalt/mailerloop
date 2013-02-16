@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>MailerLoop</id>
+    <version>1.0.2</version>    
+    <description>MailerLoop Library</description>
+    <authors>MailerGroup</authors>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="RestSharp" />
+    </dependencies>
+  </metadata>
+</package>
