@@ -44,15 +44,13 @@ class MailerLoop {
 
         $this->isTest = 1;
 
+        return $this;
     }
 
-	public function setRecipient( $email, $name = null ) {
+	public function setRecipient( $email, $name = '' ) {
 
 	   $this->recipientEmail = $email;
-
-	   if ( !empty( $name ) ) {
-	       $this->recipientName = $name;
-	   }
+           $this->recipientName = $name;
 
 	   return $this;
 	}
@@ -194,6 +192,7 @@ class MailerLoop {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false );
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
 
 		$res = curl_exec($ch);
 
