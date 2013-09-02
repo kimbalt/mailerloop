@@ -1,0 +1,13 @@
+{
+    "type": "library",
+    "name": "mailerlite/mailerloop",
+    "keywords": ["mailerlite", "mailerloop"],
+    "require": {
+        "php": ">=5.2.0"
+    },
+    "autoload": {
+        "classmap": [
+            "PHP/"
+        ]
+    }
+}
