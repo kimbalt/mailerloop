@@ -47,6 +47,11 @@ class MailerLoop {
         return $this;
     }
 
+    public function clearRecipients()
+    {
+        $this->batchRecipients = [];
+    }
+
 	public function setRecipient( $email, $name = '' ) {
 
 	   $this->recipientEmail = $email;
