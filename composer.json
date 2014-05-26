@@ -1,6 +1,6 @@
 {
     "type": "library",
-    "name": "mailerlite/mailerloop",
+    "name": "kimbalt/mailerloop",
     "keywords": ["mailerlite", "mailerloop"],
     "require": {
         "php": ">=5.2.0"
